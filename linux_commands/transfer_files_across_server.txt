@@ -1,0 +1,1 @@
+scp -r <file_name> madhurp@gb-slo-svr-0034:<new_file_name>
