@@ -1,0 +1,21 @@
+nohup spark2-submit \
+--master yarn \
+--name "affinity_clusters" \
+--queue root.sse   \
+--deploy-mode client \
+--principal $USER@DUNNHUMBY.CO.UK \
+--keytab ~/$USER.keytab \
+--driver-memory=5G \
+--executor-memory=8G \
+--conf spark.dynamicAllocation.initialExecutors=2 \
+--conf spark.dynamicAllocation.maxExecutors=10 \
+--conf spark.yarn.driver.memoryOverhead=1G \
+--conf spark.yarn.executor.memoryOverhead=1G \
+--conf spark.kryoserializer.buffer.max=2047M \
+--conf spark.network.timeout=300000 \
+--conf spark.dynamicAllocation.cachedExecutorIdleTimeout=900 \
+--conf spark.executor.heartbeatInterval=300s \
+--conf spark.task.maxDirectResultSize=10000000000B \
+--conf spark.port.maxRetries=100 \
+--jars /nfs/science/shared/lib/databricks/commons-csv-1.4.jar,/nfs/science/shared/lib/databricks/spark-csv_2.10-1.5.0.jar \
+$1.py > $1.log
